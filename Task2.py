@@ -3,23 +3,17 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score, precision_score, confusion_matrix
 
-# Загрузка данных
 data = pd.read_csv('dataset.csv')
 
-# Разделение на признаки (X) и целевую переменную (y)
 X = data.drop('sl', axis=1)
 y = data['sl']
 
-# Разделение на тренировочный и тестовый наборы
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Создание объекта классификатора
 nb_classifier = GaussianNB()
 
-# Обучение модели на тренировочных данных
 nb_classifier.fit(X_train, y_train)
 
-# Вывод метрик accuracy и precision
 print('Metrics on Test Set:')
 print('-' * 20)
 y_pred = nb_classifier.predict(X_test)
@@ -28,7 +22,6 @@ precision = precision_score(y_test, y_pred, average='macro')
 print('Accuracy:', accuracy)
 print('Precision:', precision)
 
-# Вывод корреляционной матрицы
 print('\nCorrelation Matrix:')
 print('-' * 20)
 corr_matrix = confusion_matrix(y_test, y_pred)
